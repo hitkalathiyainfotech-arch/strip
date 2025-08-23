@@ -8,6 +8,8 @@ const { resolve } = require("path");
 const STRIPE_SECRET_KEY = process.env.STRIP_SECRET;
 const stripe = require("stripe")(STRIPE_SECRET_KEY);
 
+
+
 app.use(express.static("."));
 app.use(express.json());
 
