@@ -13,10 +13,12 @@ const stripe = require("stripe")(STRIPE_SECRET_KEY);
 app.use(express.static("."));
 app.use(express.json());
 
-const calculateOrderAmount = items => {
-    console.log(items[0].amount);
-    return items[0].amount;
+const calculateOrderAmount = (items) => {
+    console.log("Original amount:", items[0].amount);
+    // Convert to cents (integer)
+    return Math.round(items[0].amount * 100);
 };
+
 
 app.post("/create-payment-intent", async (req, res) => {
     const { items, currency } = req.body;
