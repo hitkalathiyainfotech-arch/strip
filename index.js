@@ -14,10 +14,14 @@ app.use(express.static("."));
 app.use(express.json());
 
 const calculateOrderAmount = (items) => {
+    if (!items || !Array.isArray(items) || items.length === 0) {
+        throw new Error("Items array is missing or empty");
+    }
+
     console.log("Original amount:", items[0].amount);
-    // Convert to cents (integer)
     return Math.round(items[0].amount * 100);
 };
+
 
 
 app.post("/create-payment-intent", async (req, res) => {
